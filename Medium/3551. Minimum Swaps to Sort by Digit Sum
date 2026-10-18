@@ -1,0 +1,56 @@
+#include <numeric>
+#include <algorithm>
+#include <unordered_map>
+using namespace std;
+
+class Solution {
+private:
+    int sumaD(int n) {
+        int suma = 0;
+        while (n > 0) {
+            suma += n % 10;
+            n /= 10;
+        }
+        return suma;
+    }
+
+public:
+    int minSwaps(vector<int>& nums) {
+        int n = nums.size();
+        
+        vector<int> sorted_nums = nums;
+        sort(sorted_nums.begin(), sorted_nums.end(), [this](int a, int b) {
+            int sumA = sumaD(a);
+            int sumB = sumaD(b);
+            if (sumA != sumB) return sumA < sumB;
+            return a < b;
+        });
+
+        unordered_map<int, int> destino;
+        for (int i = 0; i < n; i++) {
+            destino[sorted_nums[i]] = i;
+        }
+
+        vector<bool> visitado(n, false);
+        int ans = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (visitado[i] || destino[nums[i]] == i) continue;
+
+            int tamano_ciclo = 0;
+            int j = i;
+
+            while (!visitado[j]) {
+                visitado[j] = true;
+                j = destino[nums[j]];
+                tamano_ciclo++;
+            }
+
+            if (tamano_ciclo > 0) {
+                ans += (tamano_ciclo - 1);
+            }
+        }
+
+        return ans;
+    }
+};
