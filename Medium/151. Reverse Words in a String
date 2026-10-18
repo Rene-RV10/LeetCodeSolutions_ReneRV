@@ -1,0 +1,26 @@
+#include<sstream>
+
+class Solution {
+public:
+    string reverseWords(string s) {
+        string palabra;
+        stringstream ss(s);
+
+        vector<string> voltear;
+
+        while(ss>>palabra){
+            voltear.push_back(palabra);
+        }
+
+        reverse(voltear.begin(), voltear.end());
+
+        string retornar = "";
+
+        for(int i=0; i<voltear.size(); i++){
+            retornar+=voltear[i];
+            if(i!=voltear.size()-1) retornar+=" ";
+        }
+
+        return retornar;
+    }
+};
