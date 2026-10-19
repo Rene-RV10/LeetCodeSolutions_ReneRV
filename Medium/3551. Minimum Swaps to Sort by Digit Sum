@@ -1,53 +1,47 @@
-#include <numeric>
-#include <algorithm>
-#include <unordered_map>
-using namespace std;
-
 class Solution {
 private:
-    int sumaD(int n) {
-        int suma = 0;
+    int digitSum(int n) {
+        int sum = 0;
         while (n > 0) {
-            suma += n % 10;
+            sum += n % 10;
             n /= 10;
         }
-        return suma;
+        return sum;
     }
 
 public:
     int minSwaps(vector<int>& nums) {
         int n = nums.size();
-        
         vector<int> sorted_nums = nums;
+        
         sort(sorted_nums.begin(), sorted_nums.end(), [this](int a, int b) {
-            int sumA = sumaD(a);
-            int sumB = sumaD(b);
+            int sumA = digitSum(a);
+            int sumB = digitSum(b);
             if (sumA != sumB) return sumA < sumB;
             return a < b;
         });
 
-        unordered_map<int, int> destino;
+        unordered_map<int, int> target_index;
         for (int i = 0; i < n; i++) {
-            destino[sorted_nums[i]] = i;
+            target_index[sorted_nums[i]] = i;
         }
 
-        vector<bool> visitado(n, false);
+        vector<bool> visited(n, false);
         int ans = 0;
 
         for (int i = 0; i < n; i++) {
-            if (visitado[i] || destino[nums[i]] == i) continue;
+            if (visited[i] || target_index[nums[i]] == i) continue;
 
-            int tamano_ciclo = 0;
+            int cycle_size = 0;
             int j = i;
-
-            while (!visitado[j]) {
-                visitado[j] = true;
-                j = destino[nums[j]];
-                tamano_ciclo++;
+            while (!visited[j]) {
+                visited[j] = true;
+                j = target_index[nums[j]];
+                cycle_size++;
             }
 
-            if (tamano_ciclo > 0) {
-                ans += (tamano_ciclo - 1);
+            if (cycle_size > 0) {
+                ans += (cycle_size - 1);
             }
         }
 
