@@ -3,24 +3,24 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        string palabra;
+        string word;
         stringstream ss(s);
 
-        vector<string> voltear;
+        vector<string> rev;
 
-        while(ss>>palabra){
-            voltear.push_back(palabra);
+        while(ss>>word){
+            rev.push_back(word);
         }
 
-        reverse(voltear.begin(), voltear.end());
+        reverse(rev.begin(), rev.end());
 
-        string retornar = "";
+        string result = "";
 
-        for(int i=0; i<voltear.size(); i++){
-            retornar+=voltear[i];
-            if(i!=voltear.size()-1) retornar+=" ";
+        for(int i=0; i<rev.size(); i++){
+            result+=rev[i];
+            if(i!=rev.size()-1) result+=" ";
         }
 
-        return retornar;
+        return result;
     }
 };
