@@ -1,24 +1,22 @@
-#include<string>
-
 class Solution {
 public:
     string reverseVowels(string& s) {
-        string vocales = "aeiouAEIOU";
+        string vowels = "aeiouAEIOU";
 
-        int izquierda=0, derecha = s.length()-1;
+        int left=0, right = s.length()-1;
 
-        while(izquierda<derecha){
-            while(izquierda<derecha && vocales.find(s[izquierda])==string::npos){
-                izquierda++;
+        while(left<right){
+            while(left<right && vowels.find(s[left])==string::npos){
+                left++;
             }
-            while(izquierda<derecha && vocales.find(s[derecha])==string::npos){
-                derecha--;
+            while(left<right && vowels.find(s[right])==string::npos){
+                right--;
             }
 
-            if(izquierda<derecha){
-                swap(s[izquierda], s[derecha]);
-                izquierda++;
-                derecha--;
+            if(left<right){
+                swap(s[left], s[right]);
+                left++;
+                right--;
             }
         }
         
