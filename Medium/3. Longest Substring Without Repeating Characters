@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
+
+        vector<int> last_seen(128, -1); 
+        
+        int max_len = 0;
+        int left = 0;
+        int right = 0;
+        
+        for (right = 0; right < s.size(); right++) {
+            if (last_seen[s[right]] >= left) {
+                max_len = max(max_len, right - left);
+                left = last_seen[s[right]] + 1;
+            }
+            
+            last_seen[s[right]] = right;
+        }
+
+        max_len = max(max_len, right-left);
+        return max_len;
+    }
+};
