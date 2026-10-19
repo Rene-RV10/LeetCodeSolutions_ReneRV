@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> targetIndices(vector<int>& nums, int target) {
+        sort(nums.begin(), nums.end());
+
+        if(!binary_search(nums.begin(), nums.end(), target)){
+            return {};
+        }
+
+        auto first = lower_bound(nums.begin(), nums.end(), target);
+        auto last = upper_bound(nums.begin(), nums.end(), target);
+
+        vector<int> indexes;
+        indexes.reserve(distance(first, last));
+
+        for(auto i=first; i!=last; i++){
+            indexes.push_back(i-nums.begin());
+        }
+
+        return indexes;
+
+    }
+};
