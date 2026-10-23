@@ -1,0 +1,18 @@
+class Solution {
+public:
+    string convertToTitle(int c) {
+        string print = "";
+        
+        while (c > 0) {
+            c--;
+            
+            char letter = 'A' + (c % 26);
+            print += letter;
+            c /= 26;
+        }
+        
+        reverse(print.begin(), print.end());
+        
+        return print;
+    }
+};
