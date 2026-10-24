@@ -1,0 +1,34 @@
+int months[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+int returnTime(string date){
+    int m = stoi(date.substr(0, 2));
+    int d = stoi(date.substr(3, 2));
+
+    int re = 0;
+
+    for(int i=0; i<m-1; i++){
+        re+=months[i];
+    }
+
+    re+=d;
+    return re;
+}
+
+class Solution {
+public:
+    int countDaysTogether(string arriveAlice, string leaveAlice, string arriveBob, string leaveBob) {
+
+        int Aa = returnTime(arriveAlice);
+        int Al = returnTime(leaveAlice);
+        int Ba = returnTime(arriveBob);
+        int Bl = returnTime(leaveBob);
+
+        int days = 0;
+
+        for(int i=max(Aa, Ba); i<=min(Al, Bl); i++){
+            if((i>=Aa && i<=Al) && (i>=Ba && i<=Bl)) days++;
+        }
+
+        return days;
+    }
+};
