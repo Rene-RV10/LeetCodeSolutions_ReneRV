@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int mySqrt(int x) {
+        if(x<0) return -1;
+        if(x==0 || x==1) return x;
+
+        double answer = x/2;
+        double err = 0.0001;
+        double diff;
+
+        do{
+            double next = 0.5* (answer + (x/answer));
+            diff = answer-next;
+
+            if(diff<0) diff*=-1;
+            answer=next;
+
+        }while(diff>err);
+
+        int returnAns = answer;
+        return returnAns;
+    }
+};
