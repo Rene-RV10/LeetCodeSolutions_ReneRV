@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int reverseBits(int n) {
+        bitset<32> bits(n);
+
+        string bin = bits.to_string();
+        reverse(bin.begin(), bin.end());
+        
+        unsigned long num = stoul(bin, nullptr, 2);
+
+        return static_cast<int>(num);
+    }
+};
