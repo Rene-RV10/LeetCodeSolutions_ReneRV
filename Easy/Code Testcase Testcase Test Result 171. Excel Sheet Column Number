@@ -1,0 +1,26 @@
+class Solution {
+public:
+    long long int po(int exp){
+        if(exp==0) return 1;
+        long long int result = 26;
+
+        for(int i=1; i<exp; i++){
+            result*=26;
+        }
+        return result;
+    }
+
+    int titleToNumber(string columnTitle) {
+        reverse(columnTitle.begin(), columnTitle.end());
+        int exp = 0;
+        long long int answer = 0;
+
+        for(char& element:columnTitle){
+            long long int add = element - 'A' + 1;
+            answer += po(exp) * add;
+            exp++;
+        }
+
+        return answer;
+    }
+};
