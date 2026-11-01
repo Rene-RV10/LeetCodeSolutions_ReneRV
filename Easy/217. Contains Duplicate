@@ -1,0 +1,17 @@
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
+
+        unordered_set<int> seen;
+        seen.reserve(nums.size());
+
+        for(auto& element:nums){
+            if(seen.find(element)!=seen.end()) return true;
+            seen.insert(element);
+        }
+
+        return false;
+    }
+};
